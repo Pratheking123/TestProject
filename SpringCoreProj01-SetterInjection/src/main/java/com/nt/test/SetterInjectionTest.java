@@ -11,29 +11,12 @@ import com.nt.sbeans.WishMessageGenerator;
 public class SetterInjectionTest {
 
 	public static void main(String[] args) {
-		 //IOC container creation (BeanFactory)
-		 DefaultListableBeanFactory factory=new DefaultListableBeanFactory();
-		 //create XmlBeanDefinitationReader  having container
-		 XmlBeanDefinitionReader reader=new XmlBeanDefinitionReader(factory);
-		 //Load spring bean cfg file
-		 reader.loadBeanDefinitions("com/nt/cfgs/applicationContext.xml");
-		
-		// get Target spring bean class obj
-		 WishMessageGenerator generator=factory.getBean("wmg",WishMessageGenerator.class);
-		//invoke the b.method
-		String result=generator.showWishMessage("raja");
-		System.out.println("Result ::"+result);
-		
-		
-		/*System.out.println();
-		FileSystemResource res=new FileSystemResource("src/main/java/com/nt/cfgs/applicationContext.xml");
-		XmlBeanFactory factory=new XmlBeanFactory(res);
-		
-		Object object=factory.getBean("wmg");
-		WishMessageGenerator generator=(WishMessageGenerator)object;
-	String result=generator.showWishMessage("aja");
-	System.out.println("Result"+result);
-	*/
+		DefaultListableBeanFactory beanFactory=new DefaultListableBeanFactory();
+		XmlBeanDefinitionReader beanDefinitionReader=new XmlBeanDefinitionReader(beanFactory);
+		beanDefinitionReader.loadBeanDefinitions("com/nt/cfgs/applicationContext.xml");
+		WishMessageGenerator generator=beanFactory.getBean("wmg",WishMessageGenerator.class);
+		String resultString=generator.showWishMessage("raja");
+		System.out.println(resultString);
 		}
 
 }
